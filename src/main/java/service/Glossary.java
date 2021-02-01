@@ -1,7 +1,8 @@
 package service;
 
 import java.util.HashMap;
-
+/** Серверный словарь содержит наборы символов, которым соответствуют определённые unicode эмодзи
+ * @author Сергей Шершавин*/
 public class Glossary {
     private static HashMap<String, String> map = new HashMap<>();
 

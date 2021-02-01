@@ -2,8 +2,10 @@ package service;
 
 import java.io.*;
 import java.net.Socket;
-import java.net.SocketAddress;
-
+//import java.net.SocketAddress;
+/** Класс соединения содержит сокет текущего подключения, а также потоки ввода-вывода,
+ * отвечающие за сериализацию сообщений для данного клиента
+ * @author Сергей Шершавин*/
 public class Connection implements Closeable {
     private final Socket socket;
     private final ObjectOutputStream out;
@@ -26,14 +28,14 @@ public class Connection implements Closeable {
         return  (Message)in.readObject();
         }
     }
-
+/*
     public SocketAddress getRemoteSocketAddress() {
     return socket.getRemoteSocketAddress();
     }
 
     public Socket getSocket() {
         return socket;
-    }
+    }*/
 
     public void close() throws IOException {
         socket.close();

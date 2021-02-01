@@ -8,7 +8,9 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-
+/** Сервер чата содержит класс-обработчик, отвечающий за пересылку сообщения, отправленного опеределенным клиентом, всем клиентам чата. Хранит карту "имя клиента - соединение" (@see{@link Connection}
+ *
+ * @author Сергей Шершавин*/
 public class Server {
     private static Map<String, Connection> connectionMap = new ConcurrentHashMap<>();
 
@@ -38,7 +40,8 @@ public class Server {
                 ConsoleHelper.writeMessage("Соединение с удалённым адресом закрыто.");
             }
         }
-
+/**Диалог получения имени нового клиента чата и включения его в карту "имя - соединение"
+ * @param connection - */
         private String serverHandshake(Connection connection) throws IOException, ClassNotFoundException {
 
             while (true) {
@@ -51,7 +54,7 @@ public class Server {
                 }
             }
         }
-
+/**Уведомление активных клиентов чата о подключении нового клиента*/
         private void notifyUsers(Connection connection, String userName) throws IOException {
             for (Map.Entry<String,Connection> en : connectionMap.entrySet()) {
                 if (!en.getKey().equals(userName)) {
@@ -59,7 +62,7 @@ public class Server {
                 }
             }
         }
-
+/** */
         private void serverMainLoop(Connection connection, String userName) throws IOException, ClassNotFoundException {
             while (true) {
                 Message msg = connection.receive();
@@ -76,7 +79,8 @@ public class Server {
             }
         }
     }
-
+/** Метод отправки сообщений всем клиентам чата:
+ * @param message - пересылаемое сообщение*/
     public static void sendBroadcastMessage(Message message) {
         for (Connection connection : connectionMap.values()) {
             try {
@@ -86,7 +90,7 @@ public class Server {
             }
         }
     }
-
+/** Запуск сервера в отдельном потоке при назначении номера определенного порта, вводимого в консоль*/
     public static void main(String[] args) {
         try (
             ServerSocket serverSocket = new ServerSocket(ConsoleHelper.readInt())) {

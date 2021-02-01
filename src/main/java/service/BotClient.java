@@ -11,7 +11,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.HashMap;
-
+/** Разновидность клиента @see {@link Client} выполняет ряд установленных команд от других клиентов при обнаружении их в чате
+ * @author Сергей Шершавин*/
 public class BotClient extends Client {
 
     protected SocketThread getSocketThread() {
@@ -21,7 +22,7 @@ public class BotClient extends Client {
     protected boolean shouldSendTextFromConsole() {
         return false;
     }
-
+/** Формирование имени бота @return String включающую постоянную подстроку с обозначением типа клиента и его случайный номер от 0 до 100*/
     protected String getUserName() {
         return "smart_bot_" + (int)(Math.random()*100);
     }
@@ -30,7 +31,10 @@ public class BotClient extends Client {
         new BotClient().run();
     }
     public class BotSocketThread extends Client.SocketThread {
+
         @Override
+        /** Получение входящего сообщения
+         * @param message - */
         protected void processIncomingMessage(String message) {
             ConsoleHelper.writeMessage(message);
             if (message.contains("/")) {
@@ -52,6 +56,7 @@ public class BotClient extends Client {
         }
 
         @Override
+        /**Отправляет приветственные пояснительные сообщения после установки соединения*/
         protected void clientMainLoop() throws IOException, ClassNotFoundException {
             sendTextMessage("Привет чатику. Я бот. Понимаю команды: /дата, /время, /день, /погода, /баш, /картинка, /предскажи, /посчитай.");
             sendTextMessage("Доступные операции: ^ + - * /. Пример ввода: 2 ^ 3");

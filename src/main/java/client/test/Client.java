@@ -7,7 +7,8 @@ import service.MessageType;
 
 import java.io.IOException;
 import java.net.Socket;
-
+/** Версия клиента чата для отправки и получения сообщений через консоль. Класс является базовым для остальных клиентов.
+ * @author Сергей Шершавин*/
 public class Client {
     protected Connection connection;
     private volatile boolean clientConnected = false;
@@ -86,15 +87,18 @@ public class Client {
                 ConsoleHelper.writeMessage(e.toString());
             }
         }
-
+/** Отображает в консоль входящее текстовое сообщение от сервера*/
         protected void processIncomingMessage(String message) {
             ConsoleHelper.writeMessage(message);
         }
-
+/** Отображает в консоль информацию о добавлении нового клиента в чат
+ * @param userName - имя нового клиента*/
         protected void informAboutAddingNewUser(String userName) {
             ConsoleHelper.writeMessage(userName + " присоединился к чату");
         }
 
+/** Отображает в консоль информацию об отключении клиента от чата
+* @param userName - имя отключенного клиента*/
         protected void informAboutDeletingNewUser(String userName) {
             ConsoleHelper.writeMessage(userName + " покинул чат");
         }
@@ -105,7 +109,7 @@ public class Client {
                 Client.this.notify();
             }
         }
-
+/** Диалог с сервером на запрос имени нового клиента*/
         protected void clientHandshake() throws IOException, ClassNotFoundException {
             while (true) {
                 Message msg = connection.receive();
@@ -119,7 +123,7 @@ public class Client {
                 }
             }
         }
-
+/** Получение сообщений от сервера в бесконечном цикле*/
         protected void clientMainLoop() throws IOException, ClassNotFoundException {
             while (true) {
                 Message msg = connection.receive();
