@@ -1,7 +1,9 @@
 package client.test;
 
 import service.ConsoleHelper;
-
+/**Клиент чата с графическим интерфейсом. Помимо стандартных возможностей консольного клиента имеет возможность
+ * принимать изображения в отдельном окне
+ * @author Сергей Шершавин*/
 public class ClientGuiController extends Client {
     private ClientGuiModel model = new ClientGuiModel();
     private ClientGuiView view = new ClientGuiView(this);

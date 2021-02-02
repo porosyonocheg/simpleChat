@@ -12,7 +12,7 @@ import java.net.Socket;
 public class Client {
     protected Connection connection;
     private volatile boolean clientConnected = false;
-
+/** Отправка и получение сообщений в чате при наличии действующего подключения*/
     public void run() {
         SocketThread socketThread = getSocketThread();
         socketThread.setDaemon(true);
@@ -56,7 +56,7 @@ public class Client {
     protected SocketThread getSocketThread() {
     return new SocketThread();
     }
-
+/**Отправка текстового сообщения в чат*/
     protected void sendTextMessage(String text) {
         try {
             connection.send(new Message(MessageType.TEXT, text));
@@ -72,7 +72,7 @@ public class Client {
     }
 
     public class SocketThread extends Thread {
-
+/**Создание подключения к серверу и запуск */
         public void run() {
             String serverAddress = getServerAddress();
             int serverPort = getServerPort();
@@ -102,7 +102,7 @@ public class Client {
         protected void informAboutDeletingNewUser(String userName) {
             ConsoleHelper.writeMessage(userName + " покинул чат");
         }
-
+/** Уведомление об изменении статуса соединения клиента*/
         protected void notifyConnectionStatusChanged(boolean clientConnected) {
             Client.this.clientConnected = clientConnected;
             synchronized (Client.this) {

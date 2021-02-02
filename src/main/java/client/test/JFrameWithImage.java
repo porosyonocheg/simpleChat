@@ -3,7 +3,8 @@ package client.test;
 import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
-
+/**Вспомогательное окно для получения изображения {@link JImageComponent}
+ * @author Сергей Шершавин*/
 public class JFrameWithImage extends JFrame {
     private JImageComponent jImageComponent;
 

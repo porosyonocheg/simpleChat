@@ -1,16 +1,16 @@
 package server;
 
-
 import service.*;
-
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-/** Сервер чата содержит класс-обработчик, отвечающий за пересылку сообщения, отправленного опеределенным клиентом, всем клиентам чата. Хранит карту "имя клиента - соединение" (@see{@link Connection}
- *
+
+/** Сервер чата содержит класс-обработчик, отвечающий за пересылку сообщения, отправленного опеределенным клиентом,
+ * всем клиентам чата. Хранит карту "имя клиента - соединение" @see{@link Connection}
  * @author Сергей Шершавин*/
+
 public class Server {
     private static Map<String, Connection> connectionMap = new ConcurrentHashMap<>();
 

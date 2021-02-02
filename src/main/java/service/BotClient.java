@@ -34,7 +34,8 @@ public class BotClient extends Client {
 
         @Override
         /** Получение входящего сообщения
-         * @param message - */
+         * @param message - пересылаемое сообщение от сервера
+         * если оно содержит косую черту, то идентифицируется в качестве команды боту*/
         protected void processIncomingMessage(String message) {
             ConsoleHelper.writeMessage(message);
             if (message.contains("/")) {
@@ -62,7 +63,8 @@ public class BotClient extends Client {
             sendTextMessage("Доступные операции: ^ + - * /. Пример ввода: 2 ^ 3");
             super.clientMainLoop();
         }
-
+/**Вычисление математических операций: умножение, деление, сложение, вычитание и возведение в степень
+ * @throws ArrayIndexOutOfBoundsException в случае несоответствующего формата входных данных*/
         private Double calculate(String str) {
             String[] num = str.split(" ");
             try {
@@ -78,6 +80,7 @@ public class BotClient extends Client {
             catch(ArrayIndexOutOfBoundsException e){sendTextMessage("Возможно вы забыли про пробелы или ввели какую-то дичь");}
             return null;
         }
+        /**Парсинг сайта с прогнозом погоды. Возвращает строку с прогнозом на текущие сутки*/
         private String parsing() {
             String url = "https://rp5.ru/%D0%9F%D0%BE%D0%B3%D0%BE%D0%B4%D0%B0_%D0%B2_%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B5_(%D1%86%D0%B5%D0%BD%D1%82%D1%80,_%D0%91%D0%B0%D0%BB%D1%87%D1%83%D0%B3)";
             try {
@@ -88,7 +91,7 @@ public class BotClient extends Client {
             catch(IOException e){}
             return url;
         }
-
+        /**Парсинг сайта БашОрг. Возвращает случайный пост*/
         private String bash() {
             String url = "https://bash.im/random";
             try {
@@ -99,7 +102,7 @@ public class BotClient extends Client {
             catch(IOException e) {}
             return url;
         }
-
+        /**Возвращает ссылку на случайную картинку сайта natgeotv.com*/
         private String imageLink() {
             String url = "https://assets-natgeotv.fnghub.com/POD/";
                int number = 0;
@@ -107,7 +110,7 @@ public class BotClient extends Client {
                url += number + ".jpg";
             return url;
         }
-
+        /**Предсказание результата события на основе генерации случайного числа*/
         private String predict() {
             ArrayList<Integer> numbersList = new ArrayList<>();
             HashMap<Integer, String> answers = new HashMap<>();

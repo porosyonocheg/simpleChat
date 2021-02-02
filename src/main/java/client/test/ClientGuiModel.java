@@ -4,6 +4,9 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
+/**Модель сущностей графического представления клиентской части чата
+ * @author Сергей Шершавин*/
+
 public class ClientGuiModel {
     private final Set<String> allUserNames = new HashSet<>();
     private String newMessage;

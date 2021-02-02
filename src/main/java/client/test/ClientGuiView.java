@@ -1,9 +1,10 @@
 package client.test;
 
-
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+/**Графическое отображение клиента средствами javax.swing*/
 
 public class ClientGuiView {
     private final ClientGuiController controller;
